@@ -3,10 +3,12 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:mobile_shop/core/error/exception.dart';
+import 'package:mobile_shop/core/db/database.dart';
+import 'package:mobile_shop/features/product/data/datasources/product_local_data_source.dart';
 import 'package:mobile_shop/features/product/data/models/product_model.dart';
 
 abstract class ProductRemoteDataSource {
-  Future<List<ProductModel>> getProductDetails();
+  Future<List<ProductModel>> getProducts();
 }
 
 class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
@@ -17,7 +19,7 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   dynamic answer;
 
   Future _getJsonData() async {
-    print('getJsonData');
+    log('_getJsonData');
     final response = await http.get(
         Uri.parse('https://db2021ecom-edca.restdb.io/rest/productdetails'),
         headers: {
@@ -33,8 +35,8 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   }
 
   @override
-  Future<List<ProductModel>> getProductDetails() async {
-    log('datasource');
+  Future<List<ProductModel>> getProducts() async {
+    log('getProductRemote');
     if (answer == null) {
       await _getJsonData();
     }

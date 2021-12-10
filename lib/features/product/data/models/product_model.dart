@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:mobile_shop/features/product/domain/entities/product_entity.dart';
 
 class ProductModel extends ProductEntity {
@@ -28,20 +30,23 @@ class ProductModel extends ProductEntity {
             capacity: capacity,
             price: price);
 
-  factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-        id: json["_id"],
-        images: List<String>.from(json["images"].map((x) => x)),
-        isFavorites: json["is_favorites"],
-        title: json["title"],
-        rating: json["rating"].toDouble(),
-        cpu: json["CPU"],
-        camera: json["camera"],
-        ssd: json["ssd"],
-        sd: json["sd"],
-        color: List<String>.from(json["color"].map((x) => x)),
-        capacity: List<String>.from(json["capacity"].map((x) => x)),
-        price: json["price"],
-      );
+  factory ProductModel.fromJson(Map<String, dynamic> json) {
+    print(json);
+    return ProductModel(
+      id: json["_id"],
+      images: List<String>.from(json["images"].map((x) => x)),
+      isFavorites: json["is_favorites"],
+      title: json["title"],
+      rating: json["rating"],
+      cpu: json["CPU"],
+      camera: json["camera"],
+      ssd: json["ssd"],
+      sd: json["sd"],
+      color: List<String>.from(json["color"].map((x) => x)),
+      capacity: List<String>.from(json["capacity"].map((x) => x)),
+      price: json["price"],
+    );
+  }
 
   Map<String, dynamic> toJson() => {
         "_id": id,
@@ -57,4 +62,46 @@ class ProductModel extends ProductEntity {
         "capacity": List<dynamic>.from(capacity.map((x) => x)),
         "price": price,
       };
+
+  Map<String, dynamic> toMap() {
+    final map = Map<String, dynamic>();
+    map["id"] = id;
+    map["images"] = images.toString();
+    map["is_favorites"] = isFavorites.toString();
+    map["title"] = title;
+    map["rating"] = rating.toString();
+    map["CPU"] = cpu;
+    map["camera"] = camera;
+    map["ssd"] = ssd;
+    map["sd"] = sd;
+    map["color"] = color.toString();
+    map["capacity"] = capacity.toString();
+    map["price"] = price.toString();
+    print('map = ');
+    print(map);
+    return map;
+  }
+
+  factory ProductModel.fromMap(Map<String, dynamic> map) {
+    return ProductModel(
+      id: map["id"],
+      images: (map['images'] as String)
+          .substring(1, (map['images'] as String).length - 1)
+          .split(', '),
+      isFavorites: map["is_favorites"] == 'true' ? true : false,
+      title: map["title"],
+      rating: double.parse(map['rating']),
+      cpu: map["cpu"],
+      camera: map["camera"],
+      ssd: map["ssd"],
+      sd: map["sd"],
+      color: (map['color'] as String)
+          .substring(1, (map['color'] as String).length - 1)
+          .split(', '),
+      capacity: (map['capacity'] as String)
+          .substring(1, (map['capacity'] as String).length - 1)
+          .split(', '),
+      price: map["price"],
+    );
+  }
 }

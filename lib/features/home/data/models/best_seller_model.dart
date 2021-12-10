@@ -34,4 +34,21 @@ class BestSellerModel extends BestSellerEntity {
         "discount_price": discountPrice,
         "picture": picture,
       };
+  factory BestSellerModel.fromMap(Map<String, dynamic> map) => BestSellerModel(
+        id: int.parse(map["id"]),
+        isFavorites: map["is_favorites"] == 'true' ? true : false,
+        title: map["title"],
+        priceWithoutDiscount: int.parse(map["price_without_discount"]),
+        discountPrice: int.parse(map["discount_price"]),
+        picture: map["picture"],
+      );
+
+  Map<String, dynamic> toMap() => {
+        "id": id.toString(),
+        "is_favorites": isFavorites.toString(),
+        "title": title,
+        "price_without_discount": priceWithoutDiscount.toString(),
+        "discount_price": discountPrice.toString(),
+        "picture": picture,
+      };
 }

@@ -26,6 +26,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'x-apikey': '2aa8e910f6c4ade81a84c9333ffc7bf6a398e'
         });
     if (response.statusCode == 200) {
+      print(response.body);
       answer = json.decode(response.body);
     } else {
       throw ServerException();
@@ -48,7 +49,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       await _getJsonData();
     }
     return (answer[0]['home_store'] as List)
-        .map((bestSeller) => HomeStoreModel.fromJson(bestSeller))
+        .map((homeStores) => HomeStoreModel.fromJson(homeStores))
         .toList();
   }
 }

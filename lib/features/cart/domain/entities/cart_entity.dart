@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
-
-import 'basket_entity.dart';
+import 'package:mobile_shop/features/cart/data/models/basket_model.dart';
 
 class CartEntity extends Equatable {
   CartEntity({
@@ -11,7 +10,7 @@ class CartEntity extends Equatable {
   });
 
   String id;
-  List<BasketEntity> basket;
+  List<BasketModel> basket;
   int total;
   String delivery;
 

@@ -6,9 +6,9 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mobile_shop/common/clr.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/core/custom_widgets/build_button.dart';
+import 'package:mobile_shop/core/db/database.dart';
 import 'package:mobile_shop/features/cart/presentation/pages/cart_page.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/best_seller_card.dart';
-import 'package:mobile_shop/features/home/presentation/widgets/label.dart';
 import 'package:mobile_shop/features/product/domain/entities/product_entity.dart';
 import 'package:mobile_shop/features/product/presentation/bloc/product_bloc.dart';
 
@@ -20,11 +20,6 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  var _opacity = 0.09119112986438677;
-  var _xOffset = -2.8329525353773874;
-  var _yOffset = 14.931732753537744;
-  var _blurRadius = 9.0396521226415;
-  var _spreadRadius = 6.0512326798349045;
   @override
   Widget build(BuildContext context) {
     context.read<ProductBloc>().add(ProductLoad());
@@ -37,15 +32,16 @@ class _ProductPageState extends State<ProductPage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is ProductInitial) {
-            return Center(child: Text('bloc has not got event'));
+            return const Center(child: Text('state is ProductInitial'));
           } else if (state is ProductError) {
             return Center(
-              child: Text('${state.message}'),
+              child: Text(state.message),
             );
           } else if (state is ProductLoaded) {
             products = state.products;
           }
           return ListView(children: [
+            // Header
             Padding(
               padding: const EdgeInsets.only(
                   left: 42.0, right: 35, top: 35, bottom: 25),
@@ -65,6 +61,7 @@ class _ProductPageState extends State<ProductPage> {
                 ],
               ),
             ),
+            // Swiper
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height / 941 * 349,
@@ -73,15 +70,14 @@ class _ProductPageState extends State<ProductPage> {
                 scale: 0.9,
                 itemBuilder: (BuildContext context, int index) {
                   return Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: BoxDecoration(
+                    padding: const EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
                       boxShadow: [
                         BoxShadow(
-                          color: Color.fromRGBO(0, 0, 0, _opacity),
-                          offset: Offset(_xOffset, _yOffset),
-                          blurRadius: _blurRadius,
-                          spreadRadius:
-                              _spreadRadius, // changes position of shadow
+                          color: Color.fromRGBO(0, 0, 0, 0.091),
+                          offset: Offset(-2.83, 14.93),
+                          blurRadius: 9.03,
+                          spreadRadius: 6.05,
                         ),
                       ],
                     ),
@@ -100,6 +96,7 @@ class _ProductPageState extends State<ProductPage> {
                 pagination: SwiperPagination.rect,
               ),
             ),
+            // body
             Container(
               padding: EdgeInsets.only(top: 28),
               decoration: BoxDecoration(
@@ -187,7 +184,7 @@ class _ProductPageState extends State<ProductPage> {
                         Column(
                           children: [
                             Image.asset('assets/icons/cpu.png'),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(products[0].cpu, style: Style.txtGrey11)
@@ -196,7 +193,7 @@ class _ProductPageState extends State<ProductPage> {
                         Column(
                           children: [
                             Image.asset('assets/icons/camera.png'),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(products[0].camera, style: Style.txtGrey11)
@@ -205,7 +202,7 @@ class _ProductPageState extends State<ProductPage> {
                         Column(
                           children: [
                             Image.asset('assets/icons/ssd.png'),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(products[0].ssd, style: Style.txtGrey11)
@@ -214,7 +211,7 @@ class _ProductPageState extends State<ProductPage> {
                         Column(
                           children: [
                             Image.asset('assets/icons/sd.png'),
-                            SizedBox(
+                            const SizedBox(
                               height: 5,
                             ),
                             Text(products[0].sd, style: Style.txtGrey11)
@@ -309,60 +306,6 @@ class _ProductPageState extends State<ProductPage> {
                 ],
               ),
             )
-
-            /*  Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: const EdgeInsets.only(bottom: 80.0),
-                child: Column(
-                  children: [
-                    Slider(
-                      value: _opacity,
-                      min: 0.0,
-                      max: 1.0,
-                      onChanged: (newValue) =>
-                          {setState(() => _opacity = newValue)},
-                    ),
-                    Slider(
-                      value: _xOffset,
-                      min: -100,
-                      max: 100,
-                      onChanged: (newValue) =>
-                          {setState(() => _xOffset = newValue)},
-                    ),
-                    Slider(
-                      value: _yOffset,
-                      min: -100,
-                      max: 100,
-                      onChanged: (newValue) =>
-                          {setState(() => _yOffset = newValue)},
-                    ),
-                    Slider(
-                      value: _blurRadius,
-                      min: 0,
-                      max: 100,
-                      onChanged: (newValue) =>
-                          {setState(() => _blurRadius = newValue)},
-                    ),
-                    Slider(
-                        value: _spreadRadius,
-                        min: 0,
-                        max: 100,
-                        onChanged: (newValue) => setState(
-                              () {
-                                _spreadRadius = newValue;
-                                print(_opacity);
-                                print(_xOffset);
-                                print(_yOffset);
-                                print(_blurRadius);
-                                print(_spreadRadius);
-                              },
-                            )),
-                  ],
-                ),
-              ),
-            )
-        */
           ]);
         },
       )),

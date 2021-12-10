@@ -25,6 +25,9 @@ class CartPage extends StatelessWidget {
         } else if (state is CartLoaded) {
           cart = state.cartEntity;
         } else if (state is CartInitial) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
         } else if (state is CartError) {
           throw UnimplementedError('unimplemented error');
         }
@@ -74,7 +77,7 @@ class CartPage extends StatelessWidget {
                     Container(
                       height: 280,
                       child: Padding(
-                        padding: const EdgeInsets.only(left: 33, top: 60),
+                        padding: const EdgeInsets.only(left: 23, top: 60),
                         child: ListView.builder(
                           itemCount: cart!.basket.length,
                           itemBuilder: (context, index) => Padding(
@@ -147,7 +150,10 @@ class CartPage extends StatelessWidget {
                                 const SizedBox(
                                   width: 17,
                                 ),
-                                Image.asset('assets/icons/trashbin.png')
+                                SizedBox(
+                                    width: 20,
+                                    child:
+                                        Image.asset('assets/icons/trash.png'))
                               ],
                             ),
                           ),
@@ -203,12 +209,7 @@ class CartPage extends StatelessWidget {
                       padding: const EdgeInsets.only(
                           left: 30, right: 30, top: 20, bottom: 20),
                       child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => CartPage()));
-                          },
+                          onPressed: () {},
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10)),

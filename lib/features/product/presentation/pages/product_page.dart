@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_shop/common/clr.dart';
 import 'package:mobile_shop/common/style.dart';
-import 'package:mobile_shop/core/custom_widgets/build_button.dart';
+import 'package:mobile_shop/core/custom/build_button.dart';
 import 'package:mobile_shop/features/cart/presentation/pages/cart_page.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/best_seller_card.dart';
 import 'package:mobile_shop/features/product/domain/entities/product_entity.dart';

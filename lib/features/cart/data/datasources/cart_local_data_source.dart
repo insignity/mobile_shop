@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:mobile_shop/core/services/database.dart';
+import 'package:mobile_shop/core/services/db/cart_table.dart';
 import 'package:mobile_shop/features/cart/data/models/cart_model.dart';
 
 abstract class CartLocalDataSource {
@@ -9,16 +9,15 @@ abstract class CartLocalDataSource {
 }
 
 class CartLocalDataSourceImpl implements CartLocalDataSource {
-  var db = DBProvider.db;
   @override
   Future<CartModel> getCart() {
     log('getProductLocal');
-    return db.getCart();
+    return CartTable.cartTable.read();
   }
 
   @override
-  Future storeCart(CartModel cart) {
-    db.clearCart();
-    return db.insertCart(cart);
+  Future storeCart(CartModel cartModel) {
+    CartTable.cartTable.clear();
+    return CartTable.cartTable.insert(cartModel);
   }
 }

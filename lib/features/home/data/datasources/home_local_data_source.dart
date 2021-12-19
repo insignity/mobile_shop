@@ -1,6 +1,8 @@
 import 'dart:developer';
 
-import 'package:mobile_shop/core/services/database.dart';
+import 'package:mobile_shop/core/services/db/bestseller_table.dart';
+import 'package:mobile_shop/core/services/db/database.dart';
+import 'package:mobile_shop/core/services/db/homestore_table.dart';
 import 'package:mobile_shop/features/home/data/models/best_seller_model.dart';
 import 'package:mobile_shop/features/home/data/models/home_store_model.dart';
 import 'package:mobile_shop/features/product/data/models/product_model.dart';
@@ -13,29 +15,27 @@ abstract class HomeLocalDataSource {
 }
 
 class HomeLocalDataSourceImpl implements HomeLocalDataSource {
-  var db = DBProvider.db;
-
   @override
   Future<List<BestSellerModel>> getBestSellers() {
     log('local get bestsellers');
-    return db.getBestSellers();
+    return BestSellerTable.bestSellerTable.read();
   }
 
   @override
   Future<List<HomeStoreModel>> getHomeStores() {
     log('local get homestores');
-    return db.getHomeStores();
+    return HomeStoreTable.homeStoreTable.read();
   }
 
   @override
   Future storeBestSellers(List<BestSellerModel> bestSellers) {
-    db.clearBestSellers();
-    return db.insertBestSellers(bestSellers);
+    BestSellerTable.bestSellerTable.clear();
+    return BestSellerTable.bestSellerTable.insert(bestSellers);
   }
 
   @override
   Future storeHomeStores(List<HomeStoreModel> homestores) {
-    db.clearHomeStores();
-    return db.insertHomeStores(homestores);
+    HomeStoreTable.homeStoreTable.clear();
+    return HomeStoreTable.homeStoreTable.insert(homestores);
   }
 }

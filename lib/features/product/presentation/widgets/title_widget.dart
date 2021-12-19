@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:mobile_shop/common/style.dart';
-import 'package:mobile_shop/core/custom_widgets/build_button.dart';
+import 'package:mobile_shop/core/custom/build_button.dart';
 import 'package:mobile_shop/features/product/domain/entities/product_entity.dart';
 
 Widget title(BuildContext context, ProductEntity productEntity) {

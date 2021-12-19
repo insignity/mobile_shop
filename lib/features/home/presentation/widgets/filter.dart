@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_shop/common/clr.dart';
 import 'package:mobile_shop/common/style.dart';
-import 'package:mobile_shop/core/custom_widgets/build_button.dart';
+import 'package:mobile_shop/core/custom/build_button.dart';
 
 Future<dynamic> filter(BuildContext context) {
   return showModalBottomSheet(

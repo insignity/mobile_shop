@@ -3,7 +3,6 @@ import 'dart:developer';
 
 import 'package:http/http.dart' as http;
 import 'package:mobile_shop/core/error/exception.dart';
-import 'package:mobile_shop/core/services/database.dart';
 import 'package:mobile_shop/features/product/data/datasources/product_local_data_source.dart';
 import 'package:mobile_shop/features/product/data/models/product_model.dart';
 

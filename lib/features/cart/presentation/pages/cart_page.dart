@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_shop/common/clr.dart';
 import 'package:mobile_shop/common/style.dart';
-import 'package:mobile_shop/core/custom_widgets/build_button.dart';
+import 'package:mobile_shop/core/custom/build_button.dart';
 import 'package:mobile_shop/features/cart/domain/entities/cart_entity.dart';
 import 'package:mobile_shop/features/cart/presentation/bloc/cart_bloc.dart';
 import 'package:mobile_shop/features/cart/presentation/widgets/body_widget.dart';

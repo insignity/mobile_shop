@@ -31,7 +31,6 @@ class ProductModel extends ProductEntity {
             price: price);
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
-    print(json);
     return ProductModel(
       id: json["_id"],
       images: List<String>.from(json["images"].map((x) => x)),
@@ -77,8 +76,6 @@ class ProductModel extends ProductEntity {
     map["color"] = color.toString();
     map["capacity"] = capacity.toString();
     map["price"] = price.toString();
-    print('map = ');
-    print(map);
     return map;
   }
 

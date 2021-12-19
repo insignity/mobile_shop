@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:mobile_shop/core/db/database.dart';
+import 'package:mobile_shop/core/services/database.dart';
 import 'package:mobile_shop/features/product/data/models/product_model.dart';
 
 abstract class ProductLocalDataSource {

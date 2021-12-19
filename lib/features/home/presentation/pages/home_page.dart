@@ -1,8 +1,10 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:custom_navigation_bar/custom_navigation_bar.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mobile_shop/common/clr.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/features/home/domain/entities/best_seller_entity.dart';
@@ -15,6 +17,7 @@ import 'package:mobile_shop/features/home/presentation/widgets/hot_sales.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/label.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/best_seller_card.dart';
 import 'package:mobile_shop/features/product/presentation/pages/product_page.dart';
+import 'package:mobile_shop/main.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -22,6 +25,42 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  @override
+  void initState() {
+    super.initState();
+    FirebaseMessaging.instance.getInitialMessage();
+
+    var initializationSettingsAndroid =
+        const AndroidInitializationSettings('@mipmap/ic_launcher');
+    var initializationSettings =
+        InitializationSettings(android: initializationSettingsAndroid);
+    flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+    FirebaseMessaging.onMessage.listen((message) {
+      RemoteNotification? notification = message.notification;
+      AndroidNotification? android = message.notification?.android;
+      if (notification != null && android != null) {
+        flutterLocalNotificationsPlugin.show(
+          notification.hashCode,
+          notification.title,
+          notification.body,
+          NotificationDetails(
+            android: AndroidNotificationDetails(
+              channel.id,
+              channel.name,
+              channelDescription: channel.description,
+              icon: android.smallIcon,
+            ),
+          ),
+        );
+      }
+    });
+
+    FirebaseMessaging.onMessageOpenedApp.listen((message) {
+      Navigator.pushNamed(context, '/product');
+    });
+  }
+
   int activeCategory = 0;
   String dropDownButton = "data";
   int currentIndex = 0;

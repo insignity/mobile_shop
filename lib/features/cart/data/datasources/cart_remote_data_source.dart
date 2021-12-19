@@ -17,7 +17,6 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
   dynamic answer;
 
   Future _getJsonData() async {
-    print('getJsonData');
     final response = await http.get(
         Uri.parse('https://db2021ecom-edca.restdb.io/rest/mycart'),
         headers: {

@@ -18,7 +18,6 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   dynamic answer;
 
   Future _getJsonData() async {
-    print('getJsonData');
     final response = await http.get(
         Uri.parse('https://db2021ecom-edca.restdb.io/rest/main'),
         headers: {
@@ -26,7 +25,6 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
           'x-apikey': '2aa8e910f6c4ade81a84c9333ffc7bf6a398e'
         });
     if (response.statusCode == 200) {
-      print(response.body);
       answer = json.decode(response.body);
     } else {
       throw ServerException();

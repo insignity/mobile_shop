@@ -13,6 +13,7 @@ import 'package:mobile_shop/features/home/presentation/bloc/home_bloc.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/categories.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/custom_nav_bar.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/filter.dart';
+import 'package:mobile_shop/features/home/presentation/widgets/header_widget.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/hot_sales.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/label.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/best_seller_card.dart';
@@ -112,56 +113,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget header() {
-    return Row(
-      children: [
-        Flexible(
-          flex: 1,
-          child: Container(),
-        ),
-        Flexible(
-          flex: 5,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.asset('assets/icons/point.png'),
-              const SizedBox(
-                width: 11,
-              ),
-              const Text(
-                'Zihuatanejo, Gro',
-                style: Style.txt15,
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              const RotatedBox(
-                quarterTurns: 3,
-                child: Icon(
-                  Icons.arrow_back_ios_new,
-                  color: Colors.grey,
-                  size: 15,
-                ),
-              ),
-            ],
-          ),
-        ),
-        Flexible(
-          flex: 1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              IconButton(
-                onPressed: () => filter(context),
-                icon: Image.asset('assets/icons/filter.png'),
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-
   Widget body(BuildContext context, int currentIndex) {
     double width = MediaQuery.of(context).size.width;
     var list = [
@@ -187,7 +138,7 @@ class _HomePageState extends State<HomePage> {
                     Column(
                       children: [
                         // Header
-                        header(),
+                        header(context),
                         // Select Category Title
                         label('Select Category', 'view all', () {}),
                         // Select Category ListView

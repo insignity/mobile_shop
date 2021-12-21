@@ -9,12 +9,12 @@ import 'package:mobile_shop/features/product/presentation/bloc/product_bloc.dart
 import 'features/cart/presentation/bloc/cart_bloc.dart';
 import 'features/cart/presentation/pages/cart_page.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';
+import 'features/home/presentation/pages/home_map.dart';
 import 'features/product/presentation/pages/product_page.dart';
 import 'locator_service.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
-  print('Handling a background message ${message.messageId}');
   flutterLocalNotificationsPlugin.show(
     message.hashCode,
     message.notification?.title,
@@ -24,17 +24,10 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
         channel.id,
         channel.name,
         channelDescription: channel.description,
-        // TODO add a proper drawable resource to android, for now using
-        //      one that already exists in example app.
         icon: message.notification?.android?.smallIcon,
       ),
     ),
   );
-  FirebaseMessaging.instance.getInitialMessage().then((message) {
-    if (message != null) {
-      print('object');
-    }
-  });
 }
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
@@ -105,6 +98,7 @@ class _MyAppState extends State<MyApp> {
           '/': (context) => HomePage(),
           '/product': (context) => const ProductPage(),
           '/cart': (context) => const CartPage(),
+          '/home/map': (context) => const HomeMap(),
         },
         initialRoute: '/',
         title: 'Flutter Demo',

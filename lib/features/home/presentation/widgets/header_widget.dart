@@ -5,14 +5,17 @@ import 'filter.dart';
 
 Widget header(BuildContext context) {
   return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: [
-      Flexible(
-        flex: 1,
-        child: Container(),
+      const SizedBox(
+        width: 40,
       ),
-      Flexible(
-        flex: 5,
+      InkWell(
+        onTap: () {
+          Navigator.pushNamed(context, '/home/map');
+        },
         child: Row(
+          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset('assets/icons/point.png'),
@@ -37,17 +40,14 @@ Widget header(BuildContext context) {
           ],
         ),
       ),
-      Flexible(
-        flex: 1,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            IconButton(
-              onPressed: () => filter(context),
-              icon: Image.asset('assets/icons/filter.png'),
-            ),
-          ],
-        ),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          IconButton(
+            onPressed: () => filter(context),
+            icon: Image.asset('assets/icons/filter.png'),
+          ),
+        ],
       ),
     ],
   );

@@ -1,0 +1,108 @@
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
+import 'package:mobile_shop/common/clr.dart';
+import 'package:mobile_shop/common/style.dart';
+import 'package:mobile_shop/features/home/domain/entities/best_seller_entity.dart';
+import 'package:mobile_shop/features/home/domain/entities/home_store_entity.dart';
+import 'package:mobile_shop/features/home/presentation/widgets/best_seller_card.dart';
+import 'package:mobile_shop/features/home/presentation/widgets/categories.dart';
+import 'package:mobile_shop/features/home/presentation/widgets/header_widget.dart';
+import 'package:mobile_shop/features/home/presentation/widgets/hot_sales.dart';
+import 'package:mobile_shop/features/home/presentation/widgets/label.dart';
+import 'package:mobile_shop/features/product/presentation/pages/product_page.dart';
+
+class HomeLoadedPage extends StatelessWidget {
+  final List<HomeStoreEntity> homeStores;
+  final List<BestSellerEntity> bestSellers;
+
+  const HomeLoadedPage(
+      {Key? key, required this.homeStores, required this.bestSellers})
+      : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    return Padding(
+        padding: const EdgeInsets.fromLTRB(17.0, 17.0, 17.0, 0),
+        child: ListView(children: [
+          Column(
+            children: [
+              // Header
+              header(context),
+              // Select Category Title
+              label('Select Category', 'view all', () {}),
+              // Select Category ListView
+              Categories(),
+              // Search
+              Row(
+                children: [
+                  Flexible(
+                    child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(30),
+                          color: Colors.white),
+                      child: TextFormField(
+                        autocorrect: false,
+                        style: Style.txt12,
+                        decoration: const InputDecoration(
+                          icon: Padding(
+                            padding: EdgeInsets.only(left: 24.0),
+                            child: Icon(
+                              Icons.search,
+                              color: Clr.orange,
+                            ),
+                          ),
+                          contentPadding: EdgeInsets.only(left: 10),
+                          border: InputBorder.none,
+                          hintText: 'Search',
+                          hintStyle: Style.txt12opacity50,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 11),
+                  Container(
+                      height: 34,
+                      width: 34,
+                      decoration: const BoxDecoration(
+                          color: Clr.orange, shape: BoxShape.circle),
+                      child: Image.asset('assets/icons/qr.png'))
+                ],
+              ),
+              // Hot Sales
+              label('Hot Sales', 'see more', () {}),
+              CarouselSlider.builder(
+                  options: CarouselOptions(
+                      autoPlay: true, height: width / 2, viewportFraction: 1),
+                  itemBuilder: (context, index, realIndex) {
+                    return hotSales(homeStores[index]);
+                  },
+                  itemCount: homeStores.length),
+              // Best Seller
+              label('Best Seller', 'see more', () {}),
+              Container(
+                height: width * 1.15,
+                child: GridView.count(
+                  physics: NeverScrollableScrollPhysics(),
+                  childAspectRatio: 181 / 227,
+                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 14,
+                  children: [
+                    for (var index in bestSellers)
+                      InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const ProductPage()));
+                          },
+                          child: bestSellerCard(index))
+                  ],
+                  crossAxisCount: 2,
+                ),
+              ),
+            ],
+          ),
+        ]));
+  }
+}

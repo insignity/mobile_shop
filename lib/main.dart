@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:mobile_shop/common/clr.dart';
 import 'package:mobile_shop/features/home/presentation/pages/home_page.dart';
+import 'package:mobile_shop/features/home/presentation/widgets/firebase.dart';
 import 'package:mobile_shop/features/product/presentation/bloc/product_bloc.dart';
 import 'features/cart/presentation/bloc/cart_bloc.dart';
 import 'features/cart/presentation/pages/cart_page.dart';
@@ -21,9 +22,9 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
     message.notification?.body,
     NotificationDetails(
       android: AndroidNotificationDetails(
-        channel.id,
-        channel.name,
-        channelDescription: channel.description,
+        FirebaseSettings.channel.id,
+        FirebaseSettings.channel.name,
+        channelDescription: FirebaseSettings.channel.description,
         icon: message.notification?.android?.smallIcon,
       ),
     ),
@@ -32,38 +33,18 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
     FlutterLocalNotificationsPlugin();
-const AndroidNotificationChannel channel = AndroidNotificationChannel(
-  'high_importance_channel', // id
-  'High Importance Notifications', // title
-  description:
-      'This channel is used for important notifications.', // description
-  importance: Importance.high,
-);
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await init();
-  await Firebase.initializeApp(
-      options: const FirebaseOptions(
-    apiKey: 'AIzaSyD48NkXB1nWeWOQl403Uo0V-_NZwusug3w',
-    appId: '1:878058969731:android:936ff80bc900230c1f19b6',
-    messagingSenderId: '878058969731',
-    projectId: 'mobile-shop-21a1e',
-  ));
+  await Firebase.initializeApp(options: FirebaseSettings().firebaseOptions);
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
-
-  getToken();
+      ?.createNotificationChannel(FirebaseSettings.channel);
   runApp(const MyApp());
-}
-
-getToken() async {
-  String? token = await FirebaseMessaging.instance.getToken();
-  print('token is ' + token.toString());
 }
 
 class MyApp extends StatefulWidget {

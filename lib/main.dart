@@ -1,4 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +45,16 @@ void main() async {
       .resolvePlatformSpecificImplementation<
           AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(FirebaseSettings.channel);
+
+  FirebaseDynamicLinks dynamicLinks = FirebaseDynamicLinks.instance;
+
+  final DynamicLinkParameters parameters = DynamicLinkParameters(
+    uriPrefix: 'https://my-awesome-app.page.link',
+    link: Uri.parse('https://my-awesome-app.page.link/cart'),
+  );
+
+  final Uri uri = await dynamicLinks.buildLink(parameters);
+
   runApp(const MyApp());
 }
 
@@ -91,7 +102,7 @@ class _MyAppState extends State<MyApp> {
                     borderRadius: BorderRadius.circular(10.0),
                   )),
                   padding: MaterialStateProperty.all(
-                      EdgeInsets.symmetric(horizontal: 38)),
+                      const EdgeInsets.symmetric(horizontal: 38)),
                   backgroundColor: MaterialStateProperty.all(Clr.orange))),
           primarySwatch: Colors.blue,
         ),

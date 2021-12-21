@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mobile_shop/features/home/presentation/pages/home_error_page.dart';
 
 import '../../../../main.dart';
 
@@ -57,5 +59,18 @@ class FirebaseSettings {
   getToken() async {
     String? token = await FirebaseMessaging.instance.getToken();
     print('token is ' + token.toString());
+  }
+
+  deeplink(BuildContext context) async {
+    FirebaseDynamicLinks.instance.onLink.listen((dynamicLinkData) {
+      Navigator.pushNamed(context, dynamicLinkData.link.path);
+    }).onError((error) {
+      Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (context) => HomeErrorPage(
+                    message: 'Wrong deeplink',
+                  )));
+    });
   }
 }

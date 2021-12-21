@@ -1,7 +1,9 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/features/home/presentation/bloc/home_bloc.dart';
+import 'package:mobile_shop/features/home/presentation/pages/home_error_page.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/custom_nav_bar.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/firebase.dart';
 
@@ -18,6 +20,7 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     FirebaseSettings().initMessaging();
     FirebaseSettings().listen(context);
+    FirebaseSettings().deeplink(context);
   }
 
   int currentIndex = 0;

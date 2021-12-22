@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/core/error/failure.dart';
 import 'package:mobile_shop/features/cart/domain/entities/cart_entity.dart';
 import 'package:mobile_shop/features/cart/domain/usecases/get_cart.dart';
@@ -7,9 +8,6 @@ import 'package:mobile_shop/features/product/presentation/bloc/product_bloc.dart
 
 part 'cart_event.dart';
 part 'cart_state.dart';
-
-const serverFailureMessage = 'Server Failure';
-const cacheFailureMessage = 'Cache Failure';
 
 class CartBloc extends Bloc<CartEvent, CartState> {
   GetCart getCart;
@@ -31,10 +29,10 @@ class CartBloc extends Bloc<CartEvent, CartState> {
 String _mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
     case ServerFailure:
-      return serverFailureMessage;
+      return Strings.serverFailureMessage;
     case CacheFailure:
-      return cacheFailureMessage;
+      return Strings.cacheFailureMessage;
     default:
-      return 'Unexpected Error';
+      return Strings.unexpectedErrorMessage;
   }
 }

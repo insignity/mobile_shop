@@ -24,7 +24,7 @@ import 'package:mobile_shop/features/product/presentation/bloc/product_bloc.dart
 
 final sl = GetIt.instance;
 
-Future init() async {
+Future serviceLocatorInit() async {
   //BloC
   sl.registerFactory(() => HomeBloc(getBestSellers: sl(), getHomeStores: sl()));
 

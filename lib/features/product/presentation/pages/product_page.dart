@@ -2,6 +2,9 @@ import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mobile_shop/common/clr.dart';
+import 'package:mobile_shop/common/paths.dart';
+import 'package:mobile_shop/common/routes.dart';
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/core/custom/build_button.dart';
 import 'package:mobile_shop/features/cart/presentation/pages/cart_page.dart';
@@ -11,6 +14,7 @@ import 'package:mobile_shop/features/product/presentation/bloc/product_bloc.dart
 import 'package:mobile_shop/features/product/presentation/widgets/color_and_capacity_widget.dart';
 import 'package:mobile_shop/features/product/presentation/widgets/details_widget.dart';
 import 'package:mobile_shop/features/product/presentation/widgets/title_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ProductPage extends StatefulWidget {
   const ProductPage({Key? key}) : super(key: key);
@@ -32,7 +36,7 @@ class _ProductPageState extends State<ProductPage> {
               child: CircularProgressIndicator(),
             );
           } else if (state is ProductInitial) {
-            return const Center(child: Text('state is ProductInitial'));
+            return const Center(child: Text(Strings.stateIsProductInitial));
           } else if (state is ProductError) {
             return Center(
               child: Text(state.message),
@@ -52,11 +56,11 @@ class _ProductPageState extends State<ProductPage> {
                     context,
                     Icon(Icons.arrow_back_ios_new),
                   ),
-                  const Text(
-                    'Product Details',
+                  Text(
+                    AppLocalizations.of(context)!.productDetails,
                     style: Style.txt18,
                   ),
-                  buildButton(context, Image.asset('assets/icons/bag.png'),
+                  buildButton(context, Image.asset(Paths.bag),
                       color: Clr.orange)
                 ],
               ),
@@ -108,18 +112,15 @@ class _ProductPageState extends State<ProductPage> {
                   title(context, products[0]),
                   // shop details features
                   // detail icons
-                  ...detailsWidget(products[0]),
+                  ...detailsWidget(products[0], context),
                   // title select color and capacity
-                  ...colorAndCapacity(products[0]),
+                  ...colorAndCapacity(products[0], context),
                   //button
                   Padding(
                     padding: const EdgeInsets.all(30),
                     child: ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => CartPage()));
+                          Navigator.pushNamed(context, Routes.cart);
                         },
                         child: Container(
                           decoration: BoxDecoration(
@@ -127,9 +128,9 @@ class _ProductPageState extends State<ProductPage> {
                           height: 54,
                           child: Row(
                             children: [
-                              const Text(
-                                'Add to Cart',
-                                style: Style.txtWhite20,
+                              Text(
+                                AppLocalizations.of(context)!.addToCart,
+                                style: Style.txtWhite15,
                               ),
                               const Spacer(),
                               Text(toPrice(products[0].price),

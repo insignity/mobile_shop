@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_shop/common/clr.dart';
+import 'package:mobile_shop/common/paths.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/core/custom/build_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HeaderWidget extends StatelessWidget {
   const HeaderWidget({
@@ -21,14 +23,14 @@ class HeaderWidget extends StatelessWidget {
             Icon(Icons.arrow_back_ios_new),
           ),
           Spacer(),
-          const Text(
-            'Add address',
+          Text(
+            AppLocalizations.of(context)!.addAddress,
             style: Style.txt18,
           ),
           const SizedBox(
             width: 10,
           ),
-          buildButton(context, Image.asset('assets/icons/location_point.png'),
+          buildButton(context, Image.asset(Paths.locationPoint),
               color: Clr.orange)
         ],
       ),

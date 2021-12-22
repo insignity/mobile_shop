@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_shop/common/clr.dart';
+import 'package:mobile_shop/common/paths.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/features/product/domain/entities/product_entity.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-List<Widget> detailsWidget(ProductEntity productEntity) {
+List<Widget> detailsWidget(ProductEntity productEntity, BuildContext context) {
   return [
     Padding(
       padding: const EdgeInsets.only(top: 32.0),
@@ -12,8 +14,8 @@ List<Widget> detailsWidget(ProductEntity productEntity) {
         children: [
           Column(
             children: [
-              const Text(
-                'Shop',
+              Text(
+                AppLocalizations.of(context)!.shop,
                 style: Style.txt20,
               ),
               Container(
@@ -24,12 +26,12 @@ List<Widget> detailsWidget(ProductEntity productEntity) {
               )
             ],
           ),
-          const Text(
-            'Details',
+          Text(
+            AppLocalizations.of(context)!.details,
             style: Style.txt20opacity50,
           ),
-          const Text(
-            'Features',
+          Text(
+            AppLocalizations.of(context)!.features,
             style: Style.txt20opacity50,
           ),
         ],
@@ -43,7 +45,7 @@ List<Widget> detailsWidget(ProductEntity productEntity) {
         children: [
           Column(
             children: [
-              Image.asset('assets/icons/cpu.png'),
+              Image.asset(Paths.cpu),
               const SizedBox(
                 height: 5,
               ),
@@ -52,7 +54,7 @@ List<Widget> detailsWidget(ProductEntity productEntity) {
           ),
           Column(
             children: [
-              Image.asset('assets/icons/camera.png'),
+              Image.asset(Paths.camera),
               const SizedBox(
                 height: 5,
               ),
@@ -61,7 +63,7 @@ List<Widget> detailsWidget(ProductEntity productEntity) {
           ),
           Column(
             children: [
-              Image.asset('assets/icons/ssd.png'),
+              Image.asset(Paths.ssd),
               const SizedBox(
                 height: 5,
               ),
@@ -70,7 +72,7 @@ List<Widget> detailsWidget(ProductEntity productEntity) {
           ),
           Column(
             children: [
-              Image.asset('assets/icons/sd.png'),
+              Image.asset(Paths.sd),
               const SizedBox(
                 height: 5,
               ),

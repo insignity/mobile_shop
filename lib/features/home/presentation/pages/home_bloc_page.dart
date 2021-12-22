@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/features/home/presentation/bloc/home_bloc.dart';
 
 import 'home_error_page.dart';
@@ -21,7 +22,7 @@ class HomeBlocPage extends StatelessWidget {
         } else if (state is HomeError) {
           return HomeErrorPage(message: state.message);
         } else {
-          return HomeErrorPage(message: 'unexpected error');
+          return HomeErrorPage(message: Strings.unexpectedErrorMessage);
         }
       }),
     );

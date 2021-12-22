@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_shop/common/paths.dart';
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/features/cart/domain/entities/cart_entity.dart';
 
@@ -51,7 +53,9 @@ class ItemsWidget extends StatelessWidget {
                     Container(
                       width: 150,
                       child: Text(
-                        '\$' + cart.basket.first.price.toString() + '.00',
+                        Strings.dollar +
+                            cart.basket.first.price.toString() +
+                            Strings.zeros,
                         style: Style.txtOrange20w500,
                       ),
                     ),
@@ -85,8 +89,7 @@ class ItemsWidget extends StatelessWidget {
                 const SizedBox(
                   width: 17,
                 ),
-                SizedBox(
-                    width: 20, child: Image.asset('assets/icons/trash.png'))
+                SizedBox(width: 20, child: Image.asset(Paths.trash))
               ],
             ),
           ),

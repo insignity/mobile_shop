@@ -1,15 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:mobile_shop/common/clr.dart';
+import 'package:mobile_shop/common/paths.dart';
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/features/product/domain/entities/product_entity.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-colorAndCapacity(ProductEntity product) => [
-      const Padding(
-        padding: EdgeInsets.only(top: 29, left: 30),
+colorAndCapacity(ProductEntity product, BuildContext context) => [
+      Padding(
+        padding: const EdgeInsets.only(top: 29, left: 30),
         child: Align(
           alignment: Alignment.centerLeft,
           child: Text(
-            'Select color and capacity',
+            AppLocalizations.of(context)!.selectColorAndCapacity,
             style: Style.txt16w500,
           ),
         ),
@@ -22,13 +25,14 @@ colorAndCapacity(ProductEntity product) => [
             for (var color in product.color)
               Container(
                   child: color.indexOf(product.color.first) == 0
-                      ? Image.asset('assets/icons/ok.png')
+                      ? Image.asset(Paths.ok)
                       : Container(),
                   height: 40,
                   width: 40,
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: Color(int.parse('0xff' + color.substring(1))))),
+                      color: Color(
+                          int.parse(Strings.t0xff + color.substring(1))))),
             const SizedBox(
               width: 0,
             ),
@@ -46,7 +50,7 @@ colorAndCapacity(ProductEntity product) => [
                           color: Clr.orange,
                           borderRadius: BorderRadius.circular(10)),
                     )
-                  : Container(
+                  : SizedBox(
                       height: 30,
                       width: 72,
                       child: Center(

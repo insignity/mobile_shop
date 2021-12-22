@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:mobile_shop/common/paths.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/core/custom/build_button.dart';
 import 'package:mobile_shop/features/product/domain/entities/product_entity.dart';
@@ -38,7 +39,7 @@ Widget title(BuildContext context, ProductEntity productEntity) {
           ),
         ],
       ),
-      buildButton(context, Image.asset('assets/icons/favorite_white.png'))
+      buildButton(context, Image.asset(Paths.favoriteWhite))
     ],
   );
 }

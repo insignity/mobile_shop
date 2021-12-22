@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:mobile_shop/common/paths.dart';
 import 'category_button.dart';
 
 class Categories extends StatefulWidget {
@@ -19,8 +20,8 @@ class _CategoriesState extends State<Categories> {
         children: [
           InkWell(
               child: categoryButton(
-                'Phones',
-                'assets/icons/smartphone.png',
+                AppLocalizations.of(context)!.phones,
+                Paths.smartphone,
                 activeCategory == 0,
               ),
               onTap: () {
@@ -33,8 +34,8 @@ class _CategoriesState extends State<Categories> {
           ),
           InkWell(
             child: categoryButton(
-              'Computers',
-              'assets/icons/computer.png',
+              AppLocalizations.of(context)!.computers,
+              Paths.computer,
               activeCategory == 1,
             ),
             onTap: () {
@@ -53,8 +54,8 @@ class _CategoriesState extends State<Categories> {
               });
             },
             child: categoryButton(
-              'Health',
-              'assets/icons/health.png',
+              AppLocalizations.of(context)!.health,
+              Paths.health,
               activeCategory == 2,
             ),
           ),
@@ -68,8 +69,8 @@ class _CategoriesState extends State<Categories> {
               });
             },
             child: categoryButton(
-              'Books',
-              'assets/icons/books.png',
+              AppLocalizations.of(context)!.books,
+              Paths.books,
               activeCategory == 3,
             ),
           ),
@@ -83,8 +84,8 @@ class _CategoriesState extends State<Categories> {
               });
             },
             child: categoryButton(
-              'Category',
-              'assets/icons/smartphone.png',
+              AppLocalizations.of(context)!.category,
+              Paths.smartphone,
               activeCategory == 4,
             ),
           ),

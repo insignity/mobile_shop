@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/core/services/db/query.dart';
 import 'package:mobile_shop/features/home/data/models/home_store_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -10,7 +11,7 @@ class HomeStoreTable extends Query {
   HomeStoreTable._();
   static final HomeStoreTable homeStoreTable = HomeStoreTable._();
 
-  final String _tableName = 'homestores';
+  final String _tableName = Strings.homestores;
 
   @override
   Future insert(model) async {

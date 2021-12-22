@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:mobile_shop/common/clr.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/features/home/domain/entities/home_store_entity.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
-Widget hotSales(HomeStoreEntity homeStore) {
+Widget hotSales(HomeStoreEntity homeStore, BuildContext context) {
   return Stack(
     children: [
       ClipRRect(
@@ -27,10 +28,10 @@ Widget hotSales(HomeStoreEntity homeStore) {
                       color: Clr.orange,
                       shape: BoxShape.circle,
                     ),
-                    child: const Center(
+                    child: Center(
                       child: Text(
-                        'New',
-                        style: TextStyle(color: Colors.white, fontSize: 10),
+                        AppLocalizations.of(context)!.tNew,
+                        style: TextStyle(color: Colors.white, fontSize: 8),
                       ),
                     ),
                   )
@@ -63,7 +64,7 @@ Widget hotSales(HomeStoreEntity homeStore) {
                       color: homeStore.id == 2 ? Colors.black : Colors.white,
                       borderRadius: BorderRadius.circular(5)),
                   child: Center(
-                    child: Text('Buy now!',
+                    child: Text(AppLocalizations.of(context)!.buyNow,
                         style:
                             homeStore.id == 2 ? Style.txtWhite11 : Style.txt11),
                   )),

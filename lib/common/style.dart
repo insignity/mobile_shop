@@ -3,6 +3,19 @@ import 'package:flutter/material.dart';
 import 'package:mobile_shop/common/clr.dart';
 
 class Style {
+  static ThemeData themeData = ThemeData(
+    elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(10.0),
+            )),
+            padding: MaterialStateProperty.all(
+                const EdgeInsets.symmetric(horizontal: 38)),
+            backgroundColor: MaterialStateProperty.all(Clr.orange))),
+    primarySwatch: Colors.blue,
+  );
+
   static const txt35 = TextStyle(
       fontSize: 35,
       color: Clr.darkBlue,
@@ -21,8 +34,6 @@ class Style {
       fontSize: 25,
       color: Colors.white,
       letterSpacing: -0.33,
-      //TODO: SF Pro Display
-      // fontFamily: 'MarkPro',
       fontWeight: FontWeight.w700);
 
   static const txt24 = TextStyle(
@@ -155,24 +166,18 @@ class Style {
       fontSize: 11,
       color: Clr.darkBlue,
       letterSpacing: -0.33,
-      // fontFamily: 'MarkPro',
-      // TODO: sf pro display
       fontWeight: FontWeight.w700);
 
   static const txtGrey11 = TextStyle(
       fontSize: 11,
       color: Clr.grey,
       letterSpacing: -0.33,
-      // fontFamily: 'MarkPro',
-      // TODO: sf pro display
       fontWeight: FontWeight.w400);
 
   static const txtWhite11 = TextStyle(
       fontSize: 11,
       color: Colors.white,
       letterSpacing: -0.33,
-      // fontFamily: 'MarkPro',
-      // TODO: sf pro display
       fontWeight: FontWeight.w700);
 
   static const txt10crossed = TextStyle(

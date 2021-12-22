@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/features/cart/domain/entities/cart_entity.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/best_seller_card.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TotalPriceWidget extends StatelessWidget {
   const TotalPriceWidget({
@@ -21,24 +22,24 @@ class TotalPriceWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'Total',
+                AppLocalizations.of(context)!.total,
                 style: Style.txtWhite15w400,
               ),
               Text(
-                'Delivery',
+                AppLocalizations.of(context)!.delivery,
                 style: Style.txtWhite15w400,
               )
             ],
           ),
         ),
-        Spacer(),
+        const Spacer(),
         Padding(
           padding: const EdgeInsets.only(right: 35.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                toPrice(cart.total) + ' us',
+                toPrice(cart.total) + AppLocalizations.of(context)!.us,
                 style: Style.txtWhite15,
               ),
               Text(

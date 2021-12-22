@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile_shop/common/clr.dart';
+import 'package:mobile_shop/common/paths.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/features/home/domain/entities/best_seller_entity.dart';
 import 'package:mobile_shop/features/home/domain/entities/home_store_entity.dart';
@@ -10,6 +11,7 @@ import 'package:mobile_shop/features/home/presentation/widgets/header_widget.dar
 import 'package:mobile_shop/features/home/presentation/widgets/hot_sales.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/label.dart';
 import 'package:mobile_shop/features/product/presentation/pages/product_page.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeLoadedPage extends StatelessWidget {
   final List<HomeStoreEntity> homeStores;
@@ -30,7 +32,8 @@ class HomeLoadedPage extends StatelessWidget {
               // Header
               header(context),
               // Select Category Title
-              label('Select Category', 'view all', () {}),
+              label(AppLocalizations.of(context)!.selectCategory,
+                  AppLocalizations.of(context)!.viewAll, () {}),
               // Select Category ListView
               Categories(),
               // Search
@@ -44,17 +47,17 @@ class HomeLoadedPage extends StatelessWidget {
                       child: TextFormField(
                         autocorrect: false,
                         style: Style.txt12,
-                        decoration: const InputDecoration(
-                          icon: Padding(
+                        decoration: InputDecoration(
+                          icon: const Padding(
                             padding: EdgeInsets.only(left: 24.0),
                             child: Icon(
                               Icons.search,
                               color: Clr.orange,
                             ),
                           ),
-                          contentPadding: EdgeInsets.only(left: 10),
+                          contentPadding: const EdgeInsets.only(left: 10),
                           border: InputBorder.none,
-                          hintText: 'Search',
+                          hintText: AppLocalizations.of(context)!.search,
                           hintStyle: Style.txt12opacity50,
                         ),
                       ),
@@ -66,24 +69,26 @@ class HomeLoadedPage extends StatelessWidget {
                       width: 34,
                       decoration: const BoxDecoration(
                           color: Clr.orange, shape: BoxShape.circle),
-                      child: Image.asset('assets/icons/qr.png'))
+                      child: Image.asset(Paths.qr))
                 ],
               ),
               // Hot Sales
-              label('Hot Sales', 'see more', () {}),
+              label(AppLocalizations.of(context)!.hotSales,
+                  AppLocalizations.of(context)!.seeMore, () {}),
               CarouselSlider.builder(
                   options: CarouselOptions(
                       autoPlay: true, height: width / 2, viewportFraction: 1),
                   itemBuilder: (context, index, realIndex) {
-                    return hotSales(homeStores[index]);
+                    return hotSales(homeStores[index], context);
                   },
                   itemCount: homeStores.length),
               // Best Seller
-              label('Best Seller', 'see more', () {}),
+              label(AppLocalizations.of(context)!.bestSeller,
+                  AppLocalizations.of(context)!.seeMore, () {}),
               Container(
                 height: width * 1.15,
                 child: GridView.count(
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   childAspectRatio: 181 / 227,
                   mainAxisSpacing: 12,
                   crossAxisSpacing: 14,

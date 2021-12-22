@@ -3,33 +3,41 @@ import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+import 'package:mobile_shop/common/routes.dart';
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/features/home/presentation/pages/home_error_page.dart';
 
-import '../../../../main.dart';
-
 class FirebaseSettings {
+  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
   FirebaseOptions firebaseOptions = const FirebaseOptions(
-    apiKey: 'AIzaSyD48NkXB1nWeWOQl403Uo0V-_NZwusug3w',
-    appId: '1:878058969731:android:936ff80bc900230c1f19b6',
-    messagingSenderId: '878058969731',
-    projectId: 'mobile-shop-21a1e',
+    apiKey: Strings.apiKey,
+    appId: Strings.appId,
+    messagingSenderId: Strings.messagingSenderId,
+    projectId: Strings.projectId,
   );
 
   static const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'high_importance_channel', // id
-    'High Importance Notifications', // title
-    description:
-        'This channel is used for important notifications.', // description
+    Strings.channelId, // id
+    Strings.channelTitle, // title
+    description: Strings.channelDescription, // description
     importance: Importance.high,
   );
 
   initMessaging() async {
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(FirebaseSettings.channel);
+
     FirebaseMessaging.instance.getInitialMessage();
 
     var initializationSettingsAndroid =
-        const AndroidInitializationSettings('@mipmap/ic_launcher');
+        const AndroidInitializationSettings(Strings.iconPath);
     var initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
+
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
 
     FirebaseMessaging.onMessage.listen((message) {
@@ -54,11 +62,28 @@ class FirebaseSettings {
     getToken();
   }
 
+  Future firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+    await Firebase.initializeApp();
+    flutterLocalNotificationsPlugin.show(
+      message.hashCode,
+      message.notification?.title,
+      message.notification?.body,
+      NotificationDetails(
+        android: AndroidNotificationDetails(
+          FirebaseSettings.channel.id,
+          FirebaseSettings.channel.name,
+          channelDescription: FirebaseSettings.channel.description,
+          icon: message.notification?.android?.smallIcon,
+        ),
+      ),
+    );
+  }
+
   listen(BuildContext context) => FirebaseMessaging.onMessageOpenedApp
-      .listen((message) => Navigator.pushNamed(context, '/product'));
+      .listen((message) => Navigator.pushNamed(context, Routes.product));
   getToken() async {
     String? token = await FirebaseMessaging.instance.getToken();
-    print('token is ' + token.toString());
+    print(token.toString());
   }
 
   deeplink(BuildContext context) async {
@@ -69,7 +94,7 @@ class FirebaseSettings {
           context,
           MaterialPageRoute(
               builder: (context) => HomeErrorPage(
-                    message: 'Wrong deeplink',
+                    message: Strings.wrongDeeplink,
                   )));
     });
   }

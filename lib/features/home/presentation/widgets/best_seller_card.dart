@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_shop/common/paths.dart';
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/features/home/domain/entities/best_seller_entity.dart';
 
@@ -36,8 +38,8 @@ Widget bestSellerCard(BestSellerEntity product) {
                     ], shape: BoxShape.circle, color: Colors.white),
                     child: Image.asset(
                       product.isFavorites
-                          ? 'assets/icons/favorite_filled.png'
-                          : 'assets/icons/favorite.png',
+                          ? Paths.favoriteFilled
+                          : Paths.favorite,
                       height: 15,
                     ),
                   )),
@@ -71,9 +73,9 @@ String toPrice(int price) {
   String result = price > 1000
       ? (price ~/ 1000).toString() +
           ',' +
-          (price ~/ 100 % 10 > 0 ? "${price ~/ 100 % 10}" : "0") +
-          (price % 100 ~/ 10 > 0 ? "${price % 100 ~/ 10}" : "0") +
+          (price ~/ 100 % 10 > 0 ? "${price ~/ 100 % 10}" : Strings.zero) +
+          (price % 100 ~/ 10 > 0 ? "${price % 100 ~/ 10}" : Strings.zero) +
           '${price % 10}'
       : price.toString();
-  return '\$' + result;
+  return Strings.dollar + result;
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:mobile_shop/common/strings.dart';
 
 class HomeMap extends StatefulWidget {
   const HomeMap({Key? key}) : super(key: key);
@@ -11,16 +12,16 @@ class HomeMap extends StatefulWidget {
 
 final Set<Marker> _setMarker = {
   const Marker(
-      markerId: MarkerId('firstMarker'),
+      markerId: MarkerId(Strings.markerId1),
       position: LatLng(37.4279613, -122.085749),
       anchor: Offset(0, 0),
-      infoWindow: InfoWindow(title: 'Info window'),
+      infoWindow: InfoWindow(title: Strings.markerId1InfoWindow),
       rotation: 20.0),
   const Marker(
-      markerId: MarkerId('secondMarker'),
+      markerId: MarkerId(Strings.markerId2),
       position: LatLng(37.4269613, -122.087749)),
   const Marker(
-      markerId: MarkerId('thirdMarker'),
+      markerId: MarkerId(Strings.markerId3),
       position: LatLng(37.4169613, -122.08549)),
 };
 Future<Position> _determinePosition() async {
@@ -29,20 +30,19 @@ Future<Position> _determinePosition() async {
 
   serviceEnabled = await Geolocator.isLocationServiceEnabled();
   if (!serviceEnabled) {
-    return Future.error('Location services are disabled.');
+    return Future.error(Strings.locationServicesAreDisabled);
   }
 
   permission = await Geolocator.checkPermission();
   if (permission == LocationPermission.denied) {
     permission = await Geolocator.requestPermission();
     if (permission == LocationPermission.denied) {
-      return Future.error('Location permissions are denied');
+      return Future.error(Strings.locationPermissionDenied);
     }
   }
 
   if (permission == LocationPermission.deniedForever) {
-    return Future.error(
-        'Location permissions are permanently denied, we cannot request permissions.');
+    return Future.error(Strings.locationPermissionDeniedPermanently);
   }
   return await Geolocator.getCurrentPosition();
 }

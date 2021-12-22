@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/core/services/db/query.dart';
 import 'package:mobile_shop/features/product/data/models/product_model.dart';
 import 'package:sqflite/sqflite.dart';
@@ -10,7 +11,7 @@ class ProductTable extends Query {
   ProductTable._();
   static final ProductTable productTable = ProductTable._();
 
-  final String _tableName = 'products';
+  final String _tableName = Strings.products;
 
   @override
   Future insert(model) async {
@@ -22,7 +23,6 @@ class ProductTable extends Query {
 
   @override
   Future clear() async {
-    log('Clearing table $_tableName');
     Database db = await DBProvider.db.database;
     db.delete(_tableName);
   }

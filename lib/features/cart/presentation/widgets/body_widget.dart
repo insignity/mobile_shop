@@ -4,6 +4,7 @@ import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/features/cart/domain/entities/cart_entity.dart';
 import 'package:mobile_shop/features/cart/presentation/widgets/items_widget.dart';
 import 'package:mobile_shop/features/cart/presentation/widgets/totalprice_widget.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class BodyWidget extends StatelessWidget {
   const BodyWidget({
@@ -42,8 +43,8 @@ class BodyWidget extends StatelessWidget {
                       BoxDecoration(borderRadius: BorderRadius.circular(10)),
                   height: 54,
                   child: Center(
-                    child: const Text(
-                      'Checkout',
+                    child: Text(
+                      AppLocalizations.of(context)!.checkout,
                       style: Style.txtWhite20,
                     ),
                   ),

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_shop/common/paths.dart';
+import 'package:mobile_shop/common/routes.dart';
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/common/style.dart';
 
 import 'filter.dart';
@@ -12,18 +15,18 @@ Widget header(BuildContext context) {
       ),
       InkWell(
         onTap: () {
-          Navigator.pushNamed(context, '/home/map');
+          Navigator.pushNamed(context, Routes.map);
         },
         child: Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset('assets/icons/point.png'),
+            Image.asset(Paths.point),
             const SizedBox(
               width: 11,
             ),
             const Text(
-              'Zihuatanejo, Gro',
+              Strings.zihyatanejo,
               style: Style.txt15,
             ),
             const SizedBox(
@@ -45,7 +48,7 @@ Widget header(BuildContext context) {
         children: [
           IconButton(
             onPressed: () => filter(context),
-            icon: Image.asset('assets/icons/filter.png'),
+            icon: Image.asset(Paths.filter),
           ),
         ],
       ),

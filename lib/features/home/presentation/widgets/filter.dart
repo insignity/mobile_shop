@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_shop/common/clr.dart';
+import 'package:mobile_shop/common/paths.dart';
 import 'package:mobile_shop/common/style.dart';
 import 'package:mobile_shop/core/custom/build_button.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 Future<dynamic> filter(BuildContext context) {
   return showModalBottomSheet(
@@ -11,8 +13,9 @@ Future<dynamic> filter(BuildContext context) {
       context: context,
       builder: (context) {
         return Container(
-          padding: const EdgeInsets.only(top: 24, left: 46, right: 31),
-          height: 300,
+          padding:
+              const EdgeInsets.only(top: 24, left: 46, right: 31, bottom: 5),
+          height: 320,
           decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.vertical(top: Radius.circular(30))),
@@ -24,35 +27,40 @@ Future<dynamic> filter(BuildContext context) {
                 children: [
                   buildButton(
                     context,
-                    Image.asset('assets/icons/crossed.png'),
+                    Image.asset(Paths.crossed),
                   ),
-                  const Padding(
-                    padding: EdgeInsets.only(left: 25.0),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 25.0),
                     child: Text(
-                      'Filter options',
+                      AppLocalizations.of(context)!.filterOptions,
                       style: Style.txt18,
                     ),
                   ),
-                  buildButton(context, const Text('Done'),
+                  buildButton(context, Text(AppLocalizations.of(context)!.done),
                       color: Clr.orange, width: 79),
                 ],
               ),
               const SizedBox(
                 height: 33,
               ),
-              DropDownButton(title: 'Brand', items: [
-                'Samsung',
-                'Iphone',
-              ]),
-              DropDownButton(title: 'Price', items: [
-                '\$0 - \$300',
-                '\$300 - \$500',
-                '\$500 - \$2000',
-                '\$2000 - \$10000',
-              ]),
               DropDownButton(
-                  title: 'Size',
-                  items: ['4.5 to 5.5 inches', '5.6 to 6.5 inches']),
+                  title: AppLocalizations.of(context)!.brand,
+                  items: [
+                    AppLocalizations.of(context)!.samsung,
+                    AppLocalizations.of(context)!.iphone,
+                  ]),
+              DropDownButton(
+                  title: AppLocalizations.of(context)!.price,
+                  items: [
+                    AppLocalizations.of(context)!.price1,
+                    AppLocalizations.of(context)!.price2,
+                    AppLocalizations.of(context)!.price3,
+                    AppLocalizations.of(context)!.price4,
+                  ]),
+              DropDownButton(title: AppLocalizations.of(context)!.size, items: [
+                AppLocalizations.of(context)!.size1,
+                AppLocalizations.of(context)!.size2
+              ]),
             ],
           ),
         );

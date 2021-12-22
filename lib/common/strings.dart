@@ -1,34 +1,38 @@
 class Strings {
-  static const String bestId = 'id';
-  static const String bestIsFavorites = 'is_favorites';
-  static const String bestTitle = 'title';
-  static const String bestPriceWD = 'price_without_discount';
-  static const String bestDiscountPrice = 'discount_price';
-  static const String bestPicture = 'picture';
+  static const apiKey = 'AIzaSyD48NkXB1nWeWOQl403Uo0V-_NZwusug3w';
+  static const appId = '1:878058969731:android:936ff80bc900230c1f19b6';
+  static const messagingSenderId = '878058969731';
+  static const projectId = 'mobile-shop-21a1e';
 
-  static const String homeid = 'id';
-  static const String homeisNew = 'is_new';
-  static const String homeisFavorites = 'is_favorites';
-  static const String hometitle = 'title';
-  static const String homesubtitle = 'subtitle';
-  static const String homepicture = 'picture';
-  static const String homeisBuy = 'is_buy';
+  static const channelId = 'high_importance_channel';
+  static const channelTitle = 'High Importance Notifications';
+  static const channelDescription =
+      'This channel is used for important notifications.';
+  static const iconPath = '@mipmap/ic_launcher';
 
-  static const String columnId = 'id';
-  static const String columnImages = 'images';
-  static const String columnIsFavorites = 'is_favorites';
-  static const String columnTitle = 'title';
-  static const String columnRating = 'rating';
-  static const String columnCpu = 'cpu';
-  static const String columnCamera = 'camera';
-  static const String columnSsd = 'ssd';
-  static const String columnSd = 'sd';
-  static const String columnColor = 'color';
-  static const String columnCapacity = 'capacity';
-  static const String columnPrice = 'price';
-
-  static const String cartColumnId = '_id';
-  static const String cartColumnBasket = 'basket';
-  static const String cartColumnTotal = 'total';
-  static const String cartColumnDelivery = 'delivery';
+  static const ru = 'ru';
+  static const en = 'en';
+  static const bestsellers = 'bestsellers';
+  static const cart = 'cart';
+  static const products = 'products';
+  static const homestores = 'homestores';
+  static const databaseName = 'database10.db';
+  static const serverFailureMessage = 'Server Failure';
+  static const cacheFailureMessage = 'Cache Failure';
+  static const unexpectedErrorMessage = 'Unexpected Error';
+  static const dollar = '\$';
+  static const zeros = '.00';
+  static const markerId1 = 'firstMarker';
+  static const markerId1InfoWindow = 'Info window';
+  static const markerId2 = 'secondMarker';
+  static const markerId3 = 'thirdMarker';
+  static const locationServicesAreDisabled = 'Location services are disabled.';
+  static const locationPermissionDenied = 'Location permissions are denied';
+  static const locationPermissionDeniedPermanently =
+      'Location permissions are permanently denied, we cannot request permissions.';
+  static const zero = '0';
+  static const wrongDeeplink = 'Wrong deeplink';
+  static const zihyatanejo = 'Zihuatanejo, Gro';
+  static const stateIsProductInitial = 'State is ProductInitial';
+  static const t0xff = '0xff';
 }

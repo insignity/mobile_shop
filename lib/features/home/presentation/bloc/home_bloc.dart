@@ -1,5 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/core/error/failure.dart';
 import 'package:mobile_shop/features/home/domain/entities/best_seller_entity.dart';
 import 'package:mobile_shop/features/home/domain/entities/home_store_entity.dart';
@@ -8,9 +9,6 @@ import 'package:mobile_shop/features/home/domain/usecases/get_home_stores.dart';
 
 part 'home_event.dart';
 part 'home_state.dart';
-
-const serverFailureMessage = 'Server Failure';
-const cacheFailureMessage = 'Cache Failure';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
   GetBestSellers getBestSellers;
@@ -40,11 +38,11 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
   String _mapFailureToMessage(Failure failure) {
     switch (failure.runtimeType) {
       case ServerFailure:
-        return serverFailureMessage;
+        return Strings.serverFailureMessage;
       case CacheFailure:
-        return cacheFailureMessage;
+        return Strings.cacheFailureMessage;
       default:
-        return 'Unexpected Error';
+        return Strings.unexpectedErrorMessage;
     }
   }
 }

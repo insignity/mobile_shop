@@ -1,14 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
+import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/core/error/failure.dart';
 import 'package:mobile_shop/features/product/domain/entities/product_entity.dart';
 import 'package:mobile_shop/features/product/domain/usecases/get_products.dart';
 
 part 'product_event.dart';
 part 'product_state.dart';
-
-const serverFailureMessage = 'Server Failure';
-const cacheFailureMessage = 'Cache Failure';
 
 class ProductBloc extends Bloc<ProductEvent, ProductState> {
   GetProducts getProducts;
@@ -32,10 +30,10 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
 String _mapFailureToMessage(Failure failure) {
   switch (failure.runtimeType) {
     case ServerFailure:
-      return serverFailureMessage;
+      return Strings.serverFailureMessage;
     case CacheFailure:
-      return cacheFailureMessage;
+      return Strings.cacheFailureMessage;
     default:
-      return 'Unexpected Error';
+      return Strings.unexpectedErrorMessage;
   }
 }

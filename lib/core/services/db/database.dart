@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:mobile_shop/common/strings.dart';
+import 'package:mobile_shop/core/services/db/db_strings.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 
@@ -10,10 +11,10 @@ class DBProvider {
 
   Database? _database;
 
-  final String _bestSellersTable = 'bestsellers';
-  final String _homeStoresTable = 'homestores';
-  final String _productsTable = 'products';
-  final String _cartTable = 'cart';
+  final String _bestSellersTable = Strings.bestsellers;
+  final String _homeStoresTable = Strings.homestores;
+  final String _productsTable = Strings.products;
+  final String _cartTable = Strings.cart;
 
   Future<Database> get database async {
     if (_database != null) {
@@ -25,52 +26,50 @@ class DBProvider {
 
   Future<Database> _initDB() async {
     Directory dir = await getApplicationDocumentsDirectory();
-    String path = dir.path + 'database9.db';
+    String path = dir.path + Strings.databaseName;
     return await openDatabase(path, version: 1, onCreate: _createDB);
   }
 
   _createDB(Database db, int version) async {
-    log('creating table');
-
     await db.execute('''CREATE TABLE IF NOT EXISTS $_productsTable(
-          ${Strings.columnId} TEXT, 
-          ${Strings.columnImages} TEXT,
-          ${Strings.columnIsFavorites} TEXT,
-          ${Strings.columnTitle} TEXT,
-          ${Strings.columnRating} TEXT,
-          ${Strings.columnCpu} TEXT,
-          ${Strings.columnCamera} TEXT,
-          ${Strings.columnSsd} TEXT,
-          ${Strings.columnSd} TEXT,
-          ${Strings.columnColor} TEXT,
-          ${Strings.columnCapacity} TEXT,
-          ${Strings.columnPrice} INTEGER
+          ${DBStrings.columnId} TEXT, 
+          ${DBStrings.columnImages} TEXT,
+          ${DBStrings.columnIsFavorites} TEXT,
+          ${DBStrings.columnTitle} TEXT,
+          ${DBStrings.columnRating} TEXT,
+          ${DBStrings.columnCpu} TEXT,
+          ${DBStrings.columnCamera} TEXT,
+          ${DBStrings.columnSsd} TEXT,
+          ${DBStrings.columnSd} TEXT,
+          ${DBStrings.columnColor} TEXT,
+          ${DBStrings.columnCapacity} TEXT,
+          ${DBStrings.columnPrice} INTEGER
     )''');
 
     await db.execute('''CREATE TABLE IF NOT EXISTS $_cartTable(
-          ${Strings.cartColumnId} TEXT, 
-          ${Strings.cartColumnBasket} TEXT, 
-          ${Strings.cartColumnTotal} TEXT, 
-          ${Strings.cartColumnDelivery} TEXT
+          ${DBStrings.cartColumnId} TEXT, 
+          ${DBStrings.cartColumnBasket} TEXT, 
+          ${DBStrings.cartColumnTotal} TEXT, 
+          ${DBStrings.cartColumnDelivery} TEXT
         )''');
 
     await db.execute('''CREATE TABLE IF NOT EXISTS $_bestSellersTable(
-          ${Strings.bestId} TEXT, 
-          ${Strings.bestIsFavorites} TEXT, 
-          ${Strings.bestTitle} TEXT, 
-          ${Strings.bestPriceWD} TEXT,
-          ${Strings.bestDiscountPrice} TEXT,
-          ${Strings.bestPicture} TEXT
+          ${DBStrings.bestId} TEXT, 
+          ${DBStrings.bestIsFavorites} TEXT, 
+          ${DBStrings.bestTitle} TEXT, 
+          ${DBStrings.bestPriceWD} TEXT,
+          ${DBStrings.bestDiscountPrice} TEXT,
+          ${DBStrings.bestPicture} TEXT
         )''');
 
     await db.execute('''CREATE TABLE IF NOT EXISTS $_homeStoresTable(
-          ${Strings.homeid} TEXT, 
-          ${Strings.homeisNew} TEXT, 
-          ${Strings.homeisFavorites} TEXT, 
-          ${Strings.hometitle} TEXT,
-          ${Strings.homesubtitle} TEXT,
-          ${Strings.homepicture} TEXT,
-          ${Strings.homeisBuy} TEXT
+          ${DBStrings.homeid} TEXT, 
+          ${DBStrings.homeisNew} TEXT, 
+          ${DBStrings.homeisFavorites} TEXT, 
+          ${DBStrings.hometitle} TEXT,
+          ${DBStrings.homesubtitle} TEXT,
+          ${DBStrings.homepicture} TEXT,
+          ${DBStrings.homeisBuy} TEXT
         )''');
   }
 }

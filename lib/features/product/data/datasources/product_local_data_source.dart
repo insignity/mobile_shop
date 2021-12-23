@@ -12,7 +12,6 @@ class ProductLocalDataSourceImpl implements ProductLocalDataSource {
   var db = DBProvider.db;
   @override
   Future<List<ProductModel>> getProducts() {
-    log('getProductLocal');
     return ProductTable.productTable.read();
   }
 

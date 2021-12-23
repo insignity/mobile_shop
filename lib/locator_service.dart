@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mobile_shop/features/cart/data/datasources/cart_local_data_source.dart';
 import 'package:mobile_shop/features/cart/data/datasources/cart_remote_data_source.dart';
@@ -21,6 +22,8 @@ import 'package:mobile_shop/features/product/data/repositories/product_repositor
 import 'package:mobile_shop/features/product/domain/repositories/product_repository.dart';
 import 'package:mobile_shop/features/product/domain/usecases/get_products.dart';
 import 'package:mobile_shop/features/product/presentation/bloc/product_bloc.dart';
+
+import 'core/services/client.dart';
 
 final sl = GetIt.instance;
 
@@ -63,7 +66,9 @@ Future serviceLocatorInit() async {
       () => CartLocalDataSourceImpl());
 
   //External
-  sl.registerLazySingleton(() => http.Client());
+  final dio = Dio();
+  final client = RestClient(dio);
+  sl.registerLazySingleton(() => client);
 
   log('sl has been initialized');
 }

@@ -1,13 +1,23 @@
 import 'package:mobile_shop/features/home/domain/entities/best_seller_entity.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'best_seller_model.g.dart';
 
+@JsonSerializable()
 class BestSellerModel extends BestSellerEntity {
-  const BestSellerModel({
-    required id,
-    required isFavorites,
-    required title,
-    required priceWithoutDiscount,
-    required discountPrice,
-    required picture,
+  @JsonKey(name: "is_favorites")
+  bool isFavorites;
+  @JsonKey(name: "price_without_discount")
+  int priceWithoutDiscount;
+  @JsonKey(name: "discount_price")
+  int discountPrice;
+
+  BestSellerModel({
+    required int id,
+    required this.isFavorites,
+    required this.priceWithoutDiscount,
+    required this.discountPrice,
+    required String title,
+    required String picture,
   }) : super(
             id: id,
             isFavorites: isFavorites,
@@ -17,23 +27,10 @@ class BestSellerModel extends BestSellerEntity {
             picture: picture);
 
   factory BestSellerModel.fromJson(Map<String, dynamic> json) =>
-      BestSellerModel(
-        id: json["id"],
-        isFavorites: json["is_favorites"],
-        title: json["title"],
-        priceWithoutDiscount: json["price_without_discount"],
-        discountPrice: json["discount_price"],
-        picture: json["picture"],
-      );
+      _$BestSellerModelFromJson(json);
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "is_favorites": isFavorites,
-        "title": title,
-        "price_without_discount": priceWithoutDiscount,
-        "discount_price": discountPrice,
-        "picture": picture,
-      };
+  Map<String, dynamic> toJson() => _$BestSellerModelToJson(this);
+
   factory BestSellerModel.fromMap(Map<String, dynamic> map) => BestSellerModel(
         id: int.parse(map["id"]),
         isFavorites: map["is_favorites"] == 'true' ? true : false,

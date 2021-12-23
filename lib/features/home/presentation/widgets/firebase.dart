@@ -26,19 +26,19 @@ class FirebaseSettings {
   );
 
   initMessaging() async {
-    await flutterLocalNotificationsPlugin
-        .resolvePlatformSpecificImplementation<
-            AndroidFlutterLocalNotificationsPlugin>()
-        ?.createNotificationChannel(FirebaseSettings.channel);
-
-    FirebaseMessaging.instance.getInitialMessage();
-
     var initializationSettingsAndroid =
         const AndroidInitializationSettings(Strings.iconPath);
     var initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
 
     flutterLocalNotificationsPlugin.initialize(initializationSettings);
+
+    await flutterLocalNotificationsPlugin
+        .resolvePlatformSpecificImplementation<
+            AndroidFlutterLocalNotificationsPlugin>()
+        ?.createNotificationChannel(FirebaseSettings.channel);
+
+    FirebaseMessaging.instance.getInitialMessage();
 
     FirebaseMessaging.onMessage.listen((message) {
       RemoteNotification? notification = message.notification;
@@ -60,23 +60,6 @@ class FirebaseSettings {
       }
     });
     getToken();
-  }
-
-  Future firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-    await Firebase.initializeApp();
-    flutterLocalNotificationsPlugin.show(
-      message.hashCode,
-      message.notification?.title,
-      message.notification?.body,
-      NotificationDetails(
-        android: AndroidNotificationDetails(
-          FirebaseSettings.channel.id,
-          FirebaseSettings.channel.name,
-          channelDescription: FirebaseSettings.channel.description,
-          icon: message.notification?.android?.smallIcon,
-        ),
-      ),
-    );
   }
 
   listen(BuildContext context) => FirebaseMessaging.onMessageOpenedApp

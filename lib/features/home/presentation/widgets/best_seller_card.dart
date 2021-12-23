@@ -37,7 +37,7 @@ Widget bestSellerCard(BestSellerEntity product) {
                           blurRadius: 20)
                     ], shape: BoxShape.circle, color: Colors.white),
                     child: Image.asset(
-                      product.isFavorites
+                      product.isFavorites != null && product.isFavorites == true
                           ? Paths.favoriteFilled
                           : Paths.favorite,
                       height: 15,

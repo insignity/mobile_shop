@@ -1,11 +1,7 @@
-import 'dart:developer';
-
 import 'package:mobile_shop/core/services/db/bestseller_table.dart';
-import 'package:mobile_shop/core/services/db/database.dart';
 import 'package:mobile_shop/core/services/db/homestore_table.dart';
 import 'package:mobile_shop/features/home/data/models/best_seller_model.dart';
 import 'package:mobile_shop/features/home/data/models/home_store_model.dart';
-import 'package:mobile_shop/features/product/data/models/product_model.dart';
 
 abstract class HomeLocalDataSource {
   Future storeBestSellers(List<BestSellerModel> bestSellers);
@@ -17,13 +13,11 @@ abstract class HomeLocalDataSource {
 class HomeLocalDataSourceImpl implements HomeLocalDataSource {
   @override
   Future<List<BestSellerModel>> getBestSellers() {
-    log('local get bestsellers');
     return BestSellerTable.bestSellerTable.read();
   }
 
   @override
   Future<List<HomeStoreModel>> getHomeStores() {
-    log('local get homestores');
     return HomeStoreTable.homeStoreTable.read();
   }
 

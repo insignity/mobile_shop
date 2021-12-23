@@ -1,12 +1,9 @@
-import 'dart:developer';
-
 import 'package:mobile_shop/core/error/exception.dart';
 import 'package:mobile_shop/core/error/failure.dart';
 import 'package:dartz/dartz.dart';
 import 'package:mobile_shop/features/product/data/datasources/product_local_data_source.dart';
 import 'package:mobile_shop/features/product/data/datasources/product_remote_data_source.dart';
 import 'package:mobile_shop/features/product/data/models/product_model.dart';
-import 'package:mobile_shop/features/product/domain/entities/product_entity.dart';
 import 'package:mobile_shop/features/product/domain/repositories/product_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
@@ -18,7 +15,6 @@ class ProductRepositoryImpl implements ProductRepository {
 
   @override
   Future<Either<Failure, List<ProductModel>>> getProducts() async {
-    log('get products , got data = $gotDataFromRemote');
     return _getProducts(() => gotDataFromRemote
         ? localDataSource.getProducts()
         : remoteDataSource.getProducts());

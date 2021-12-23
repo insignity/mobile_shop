@@ -1,14 +1,23 @@
+import 'package:json_annotation/json_annotation.dart';
 import 'package:mobile_shop/features/home/domain/entities/home_store_entity.dart';
+part 'home_store_model.g.dart';
 
+@JsonSerializable()
 class HomeStoreModel extends HomeStoreEntity {
-  const HomeStoreModel({
-    required id,
-    isNew,
-    isFavorites,
-    required title,
-    required subtitle,
-    required picture,
-    required isBuy,
+  @JsonKey(name: 'is_buy')
+  bool isBuy;
+  @JsonKey(name: 'is_favorites')
+  bool? isFavorites;
+  @JsonKey(name: 'is_new')
+  bool? isNew;
+  HomeStoreModel({
+    required int id,
+    this.isNew,
+    this.isFavorites,
+    required String title,
+    required String subtitle,
+    required String picture,
+    required this.isBuy,
   }) : super(
             id: id,
             isNew: isNew,
@@ -18,25 +27,9 @@ class HomeStoreModel extends HomeStoreEntity {
             picture: picture,
             isBuy: isBuy);
 
-  factory HomeStoreModel.fromJson(Map<String, dynamic> json) => HomeStoreModel(
-        id: json["id"],
-        isNew: json["is_new"] ?? null,
-        isFavorites: json["is_favorites"] ?? null,
-        title: json["title"],
-        subtitle: json["subtitle"],
-        picture: json["picture"],
-        isBuy: json["is_buy"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "is_new": isNew,
-        "is_favorites": isFavorites,
-        "title": title,
-        "subtitle": subtitle,
-        "picture": picture,
-        "is_buy": isBuy,
-      };
+  factory HomeStoreModel.fromJson(Map<String, dynamic> json) =>
+      _$HomeStoreModelFromJson(json);
+  Map<String, dynamic> toJson() => _$HomeStoreModelToJson(this);
 
   factory HomeStoreModel.fromMap(Map<String, dynamic> map) => HomeStoreModel(
         id: int.parse(map["id"]),

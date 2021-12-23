@@ -1,21 +1,30 @@
 import 'dart:convert';
 
 import 'package:mobile_shop/features/product/domain/entities/product_entity.dart';
+import 'package:json_annotation/json_annotation.dart';
+part 'product_model.g.dart';
 
+@JsonSerializable()
 class ProductModel extends ProductEntity {
+  @JsonKey(name: '_id')
+  String id;
+  @JsonKey(name: 'is_favorites')
+  bool isFavorites;
+  @JsonKey(name: 'CPU')
+  String cpu;
   ProductModel({
-    required id,
-    required images,
-    required isFavorites,
-    required title,
-    required rating,
-    required cpu,
-    required camera,
-    required ssd,
-    required sd,
-    required color,
-    required capacity,
-    required price,
+    required this.id,
+    required List<String> images,
+    required this.isFavorites,
+    required String title,
+    required double rating,
+    required this.cpu,
+    required String camera,
+    required String ssd,
+    required String sd,
+    required List<String> color,
+    required List<String> capacity,
+    required int price,
   }) : super(
             id: id,
             images: images,
@@ -31,36 +40,10 @@ class ProductModel extends ProductEntity {
             price: price);
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
-    return ProductModel(
-      id: json["_id"],
-      images: List<String>.from(json["images"].map((x) => x)),
-      isFavorites: json["is_favorites"],
-      title: json["title"],
-      rating: json["rating"],
-      cpu: json["CPU"],
-      camera: json["camera"],
-      ssd: json["ssd"],
-      sd: json["sd"],
-      color: List<String>.from(json["color"].map((x) => x)),
-      capacity: List<String>.from(json["capacity"].map((x) => x)),
-      price: json["price"],
-    );
+    return _$ProductModelFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "images": List<dynamic>.from(images.map((x) => x)),
-        "is_favorites": isFavorites,
-        "title": title,
-        "rating": rating,
-        "CPU": cpu,
-        "camera": camera,
-        "ssd": ssd,
-        "sd": sd,
-        "color": List<dynamic>.from(color.map((x) => x)),
-        "capacity": List<dynamic>.from(capacity.map((x) => x)),
-        "price": price,
-      };
+  Map<String, dynamic> toJson() => _$ProductModelToJson(this);
 
   Map<String, dynamic> toMap() {
     final map = Map<String, dynamic>();

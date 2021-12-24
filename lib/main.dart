@@ -37,7 +37,7 @@ void main() async {
   await Firebase.initializeApp(options: FirebaseSettings().firebaseOptions);
   await FirebaseSettings().initMessaging();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-
+  print('main');
   runApp(MyApp());
 }
 

@@ -9,7 +9,7 @@ import 'app_state.dart';
 
 class ProductMiddleware extends MiddlewareClass<AppState> {
   @override
-  void call(Store<AppState> store, dynamic action, NextDispatcher next) async {
+  call(Store<AppState> store, dynamic action, NextDispatcher next) async {
     if (action is ProductLoadedAction) {
       print('action is product loaded action');
       next(action);

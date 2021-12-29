@@ -65,6 +65,8 @@ class ProductModel extends ProductEntity {
   }
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
+    print(map);
+    print(int.tryParse(map["price"]));
     return ProductModel(
       id: map["id"],
       images: (map['images'] as String)
@@ -72,7 +74,7 @@ class ProductModel extends ProductEntity {
           .split(', '),
       isFavorites: map["is_favorites"] == 'true' ? true : false,
       title: map["title"],
-      rating: double.parse(map['rating']),
+      rating: double.tryParse(map['rating']),
       cpu: map["cpu"],
       camera: map["camera"],
       ssd: map["ssd"],

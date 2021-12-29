@@ -37,7 +37,6 @@ void main() async {
   await Firebase.initializeApp(options: FirebaseSettings().firebaseOptions);
   await FirebaseSettings().initMessaging();
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
-  print('main');
   runApp(MyApp());
 }
 
@@ -48,9 +47,6 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => sl<HomeBloc>(),
-        ),
-        BlocProvider(
-          create: (context) => sl<ProductBloc>(),
         ),
         BlocProvider(
           create: (context) => sl<CartBloc>(),

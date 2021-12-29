@@ -49,7 +49,7 @@ List<Widget> detailsWidget(ProductEntity productEntity, BuildContext context) {
               const SizedBox(
                 height: 5,
               ),
-              Text(productEntity.cpu, style: Style.txtGrey11)
+              Text(productEntity.cpu!, style: Style.txtGrey11)
             ],
           ),
           Column(
@@ -58,7 +58,7 @@ List<Widget> detailsWidget(ProductEntity productEntity, BuildContext context) {
               const SizedBox(
                 height: 5,
               ),
-              Text(productEntity.camera, style: Style.txtGrey11)
+              Text(productEntity.camera!, style: Style.txtGrey11)
             ],
           ),
           Column(
@@ -67,7 +67,7 @@ List<Widget> detailsWidget(ProductEntity productEntity, BuildContext context) {
               const SizedBox(
                 height: 5,
               ),
-              Text(productEntity.ssd, style: Style.txtGrey11)
+              Text(productEntity.ssd!, style: Style.txtGrey11)
             ],
           ),
           Column(
@@ -76,7 +76,7 @@ List<Widget> detailsWidget(ProductEntity productEntity, BuildContext context) {
               const SizedBox(
                 height: 5,
               ),
-              Text(productEntity.sd, style: Style.txtGrey11)
+              Text(productEntity.sd!, style: Style.txtGrey11)
             ],
           ),
         ],

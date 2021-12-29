@@ -15,7 +15,7 @@ Widget title(BuildContext context, ProductEntity productEntity) {
         children: [
           Container(
             child: Text(
-              productEntity.title,
+              productEntity.title!,
               style: Style.txt24,
             ),
           ),
@@ -24,7 +24,7 @@ Widget title(BuildContext context, ProductEntity productEntity) {
           ),
           // Stars
           RatingBar.builder(
-            initialRating: productEntity.rating,
+            initialRating: productEntity.rating!,
             minRating: 0,
             direction: Axis.horizontal,
             allowHalfRating: true,

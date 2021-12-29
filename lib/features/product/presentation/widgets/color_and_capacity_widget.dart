@@ -22,9 +22,9 @@ colorAndCapacity(ProductEntity product, BuildContext context) => [
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            for (var color in product.color)
+            for (var color in product.color!)
               Container(
-                  child: color.indexOf(product.color.first) == 0
+                  child: color.indexOf(product.color!.first) == 0
                       ? Image.asset(Paths.ok)
                       : Container(),
                   height: 40,
@@ -36,8 +36,8 @@ colorAndCapacity(ProductEntity product, BuildContext context) => [
             const SizedBox(
               width: 0,
             ),
-            for (var capacity in product.capacity)
-              capacity.indexOf(product.capacity.first) == 0
+            for (var capacity in product.capacity!)
+              capacity.indexOf(product.capacity!.first) == 0
                   ? Container(
                       child: Center(
                           child: Text(

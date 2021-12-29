@@ -21,9 +21,9 @@ import 'package:mobile_shop/features/product/data/datasources/product_remote_dat
 import 'package:mobile_shop/features/product/data/repositories/product_repository_impl.dart';
 import 'package:mobile_shop/features/product/domain/repositories/product_repository.dart';
 import 'package:mobile_shop/features/product/domain/usecases/get_products.dart';
-import 'package:mobile_shop/features/product/presentation/bloc/product_bloc.dart';
 
 import 'core/services/client.dart';
+import 'features/product/presentation/redux/middlewares.dart';
 
 final sl = GetIt.instance;
 
@@ -31,7 +31,7 @@ Future serviceLocatorInit() async {
   //BloC
   sl.registerFactory(() => HomeBloc(getBestSellers: sl(), getHomeStores: sl()));
 
-  sl.registerFactory(() => ProductBloc(getProducts: sl()));
+  // sl.registerFactory(() => ProductMiddleware());
 
   sl.registerFactory(() => CartBloc(sl()));
 

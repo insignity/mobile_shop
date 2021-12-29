@@ -7,20 +7,22 @@ part of 'product_model.dart';
 // **************************************************************************
 
 ProductModel _$ProductModelFromJson(Map<String, dynamic> json) => ProductModel(
-      id: json['_id'] as String,
+      id: json['_id'] as String?,
       images:
-          (json['images'] as List<dynamic>).map((e) => e as String).toList(),
-      isFavorites: json['is_favorites'] as bool,
-      title: json['title'] as String,
-      rating: (json['rating'] as num).toDouble(),
-      cpu: json['CPU'] as String,
-      camera: json['camera'] as String,
-      ssd: json['ssd'] as String,
-      sd: json['sd'] as String,
-      color: (json['color'] as List<dynamic>).map((e) => e as String).toList(),
-      capacity:
-          (json['capacity'] as List<dynamic>).map((e) => e as String).toList(),
-      price: json['price'] as int,
+          (json['images'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      isFavorites: json['is_favorites'] as bool?,
+      title: json['title'] as String?,
+      rating: (json['rating'] as num?)?.toDouble(),
+      cpu: json['CPU'] as String?,
+      camera: json['camera'] as String?,
+      ssd: json['ssd'] as String?,
+      sd: json['sd'] as String?,
+      color:
+          (json['color'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      capacity: (json['capacity'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      price: json['price'] as int?,
     );
 
 Map<String, dynamic> _$ProductModelToJson(ProductModel instance) =>

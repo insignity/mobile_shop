@@ -7,24 +7,24 @@ part 'product_model.g.dart';
 @JsonSerializable()
 class ProductModel extends ProductEntity {
   @JsonKey(name: '_id')
-  String id;
+  String? id;
   @JsonKey(name: 'is_favorites')
-  bool isFavorites;
+  bool? isFavorites;
   @JsonKey(name: 'CPU')
-  String cpu;
+  String? cpu;
   ProductModel({
     required this.id,
-    required List<String> images,
+    required List<String>? images,
     required this.isFavorites,
-    required String title,
-    required double rating,
+    required String? title,
+    required double? rating,
     required this.cpu,
-    required String camera,
-    required String ssd,
-    required String sd,
-    required List<String> color,
-    required List<String> capacity,
-    required int price,
+    required String? camera,
+    required String? ssd,
+    required String? sd,
+    required List<String>? color,
+    required List<String>? capacity,
+    required int? price,
   }) : super(
             id: id,
             images: images,
@@ -40,6 +40,8 @@ class ProductModel extends ProductEntity {
             price: price);
 
   factory ProductModel.fromJson(Map<String, dynamic> json) {
+    print('fromjson');
+    print(json);
     return _$ProductModelFromJson(json);
   }
 

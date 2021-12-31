@@ -2,7 +2,7 @@ import 'package:mobile_shop/core/services/client.dart';
 import 'package:mobile_shop/features/product/data/models/product_model.dart';
 
 abstract class ProductRemoteDataSource {
-  Future<List<ProductModel>> getProducts();
+  Future<ProductModel> getProduct();
 }
 
 class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
@@ -11,7 +11,8 @@ class ProductRemoteDataSourceImpl implements ProductRemoteDataSource {
   ProductRemoteDataSourceImpl({required this.client});
 
   @override
-  Future<List<ProductModel>> getProducts() async {
-    return await client.getProductDetails();
+  Future<ProductModel> getProduct() async {
+    List<ProductModel> result = await client.getProductDetails();
+    return result.first;
   }
 }

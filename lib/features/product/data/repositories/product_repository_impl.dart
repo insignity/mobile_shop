@@ -14,14 +14,14 @@ class ProductRepositoryImpl implements ProductRepository {
       {required this.localDataSource, required this.remoteDataSource});
 
   @override
-  Future<Either<Failure, List<ProductModel>>> getProducts() async {
+  Future<Either<Failure, ProductModel>> getProducts() async {
     return _getProducts(() => gotDataFromRemote
-        ? localDataSource.getProducts()
-        : remoteDataSource.getProducts());
+        ? localDataSource.getProduct()
+        : remoteDataSource.getProduct());
   }
 
-  Future<Either<Failure, List<ProductModel>>> _getProducts(
-      Future<List<ProductModel>> Function() getFunction) async {
+  Future<Either<Failure, ProductModel>> _getProducts(
+      Future<ProductModel> Function() getFunction) async {
     try {
       final source = await getFunction();
       if (!gotDataFromRemote) {

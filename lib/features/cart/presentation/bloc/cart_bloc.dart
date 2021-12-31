@@ -4,7 +4,6 @@ import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/core/error/failure.dart';
 import 'package:mobile_shop/features/cart/domain/entities/cart_entity.dart';
 import 'package:mobile_shop/features/cart/domain/usecases/get_cart.dart';
-import 'package:mobile_shop/features/product/presentation/bloc/product_bloc.dart';
 
 part 'cart_event.dart';
 part 'cart_state.dart';

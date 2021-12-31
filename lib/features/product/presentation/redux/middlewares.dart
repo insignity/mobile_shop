@@ -10,20 +10,15 @@ import 'app_state.dart';
 class ProductMiddleware extends MiddlewareClass<AppState> {
   @override
   call(Store<AppState> store, dynamic action, NextDispatcher next) async {
-    if (action is ProductLoadedAction) {
-      print('action is product loaded action');
-      next(action);
-      store.dispatch(ProductLoadedAction(products: action.products));
-    } else if (action is ProductLoadingAction) {
-      print('action is product loading action');
-      next(action);
+    if (action is ProductLoadingAction) {
       final result = await sl.get<GetProducts>().call();
-      result.fold(
+
+      await result.fold(
           (error) => store.dispatch(
               ProductErrorAction(message: _mapFailureToMessage(error))),
-          (products) =>
-              store.dispatch(ProductLoadedAction(products: products)));
-    }
+          (products) => store.dispatch(ProductLoadedAction(product: products)));
+    } else
+      next(action);
   }
 }
 

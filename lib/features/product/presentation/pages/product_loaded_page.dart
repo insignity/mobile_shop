@@ -13,8 +13,8 @@ import 'package:mobile_shop/features/product/presentation/widgets/details_widget
 import 'package:mobile_shop/features/product/presentation/widgets/title_widget.dart';
 
 class ProductLoadedPage extends StatelessWidget {
-  List<ProductEntity> products;
-  ProductLoadedPage({Key? key, required this.products}) : super(key: key);
+  ProductEntity product;
+  ProductLoadedPage({Key? key, required this.product}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class ProductLoadedPage extends StatelessWidget {
           children: [
             buildButton(
               context,
-              Icon(Icons.arrow_back_ios_new),
+              const Icon(Icons.arrow_back_ios_new),
             ),
             Text(
               AppLocalizations.of(context)!.productDetails,
@@ -61,14 +61,13 @@ class ProductLoadedPage extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
                 child: Image.network(
-                  products[0].images![0],
+                  product.images![0],
                   fit: BoxFit.fill,
                 ),
               ),
             );
           },
-          itemCount:
-              products[0].images!.length > 1 ? products[0].images!.length : 2,
+          itemCount: product.images!.length > 1 ? product.images!.length : 2,
           pagination: SwiperPagination.rect,
         ),
       ),
@@ -81,12 +80,12 @@ class ProductLoadedPage extends StatelessWidget {
         child: Column(
           children: [
             // title and rating
-            title(context, products[0]),
+            title(context, product),
             // shop details features
             // detail icons
-            ...detailsWidget(products[0], context),
+            ...detailsWidget(product, context),
             // title select color and capacity
-            ...colorAndCapacity(products[0], context),
+            ...colorAndCapacity(product, context),
             //button
             Padding(
               padding: const EdgeInsets.all(30),
@@ -105,8 +104,7 @@ class ProductLoadedPage extends StatelessWidget {
                           style: Style.txtWhite15,
                         ),
                         const Spacer(),
-                        Text(toPrice(products[0].price!),
-                            style: Style.txtWhite20),
+                        Text(toPrice(product.price!), style: Style.txtWhite20),
                       ],
                     ),
                   )),

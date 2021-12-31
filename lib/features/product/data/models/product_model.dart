@@ -66,7 +66,6 @@ class ProductModel extends ProductEntity {
 
   factory ProductModel.fromMap(Map<String, dynamic> map) {
     print(map);
-    print(int.tryParse(map["price"]));
     return ProductModel(
       id: map["id"],
       images: (map['images'] as String)
@@ -85,7 +84,7 @@ class ProductModel extends ProductEntity {
       capacity: (map['capacity'] as String)
           .substring(1, (map['capacity'] as String).length - 1)
           .split(', '),
-      price: map["price"],
+      price: map["price"] as int,
     );
   }
 }

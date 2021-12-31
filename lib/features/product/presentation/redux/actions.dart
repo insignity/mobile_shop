@@ -3,8 +3,8 @@ import 'package:mobile_shop/features/product/domain/entities/product_entity.dart
 class ProductLoadingAction {}
 
 class ProductLoadedAction {
-  final List<ProductEntity> products;
-  const ProductLoadedAction({required this.products});
+  final ProductEntity product;
+  const ProductLoadedAction({required this.product});
 }
 
 class ProductErrorAction {

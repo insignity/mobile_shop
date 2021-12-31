@@ -19,7 +19,7 @@ Widget _getProductsReducer(Widget widget, ProductLoadingAction action) =>
     const ProductLoadingPage();
 
 Widget _loadedProductsReducer(Widget widget, ProductLoadedAction action) =>
-    ProductLoadedPage(products: action.products);
+    ProductLoadedPage(product: action.product);
 
 Widget _errorProductsReducer(Widget widget, ProductErrorAction action) =>
     ProductErrorPage(message: action.message);

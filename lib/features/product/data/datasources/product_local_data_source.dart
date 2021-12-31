@@ -4,20 +4,20 @@ import 'package:mobile_shop/core/services/db/product_table.dart';
 import 'package:mobile_shop/features/product/data/models/product_model.dart';
 
 abstract class ProductLocalDataSource {
-  Future storeProducts(List<ProductModel> products);
-  Future<List<ProductModel>> getProducts();
+  Future storeProducts(ProductModel products);
+  Future<ProductModel> getProduct();
 }
 
 class ProductLocalDataSourceImpl implements ProductLocalDataSource {
   var db = DBProvider.db;
   @override
-  Future<List<ProductModel>> getProducts() {
+  Future<ProductModel> getProduct() {
     return ProductTable.productTable.read();
   }
 
   @override
-  Future storeProducts(List<ProductModel> products) {
+  Future storeProducts(ProductModel product) {
     ProductTable.productTable.clear();
-    return ProductTable.productTable.insert(products);
+    return ProductTable.productTable.insert(product);
   }
 }

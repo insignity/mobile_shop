@@ -7,7 +7,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:mobile_shop/common/routes.dart';
 import 'package:mobile_shop/common/strings.dart';
 import 'package:mobile_shop/features/home/presentation/widgets/firebase.dart';
-import 'package:mobile_shop/features/product/presentation/bloc/product_bloc.dart';
 import 'common/style.dart';
 import 'features/cart/presentation/bloc/cart_bloc.dart';
 import 'features/home/presentation/bloc/home_bloc.dart';

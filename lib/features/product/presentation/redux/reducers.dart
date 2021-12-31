@@ -10,12 +10,12 @@ AppState productReducer(AppState state, dynamic action) =>
     AppState(widget: _productReducer(state.widget, action));
 
 Reducer<Widget> _productReducer = combineReducers([
-  TypedReducer(_getProductsReducer),
+  TypedReducer(_loadingProductsReducer),
   TypedReducer(_loadedProductsReducer),
   TypedReducer(_errorProductsReducer),
 ]);
 
-Widget _getProductsReducer(Widget widget, ProductLoadingAction action) =>
+Widget _loadingProductsReducer(Widget widget, ProductLoadingAction action) =>
     const ProductLoadingPage();
 
 Widget _loadedProductsReducer(Widget widget, ProductLoadedAction action) =>

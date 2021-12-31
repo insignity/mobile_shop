@@ -17,8 +17,9 @@ class ProductMiddleware extends MiddlewareClass<AppState> {
           (error) => store.dispatch(
               ProductErrorAction(message: _mapFailureToMessage(error))),
           (products) => store.dispatch(ProductLoadedAction(product: products)));
-    } else
+    } else {
       next(action);
+    }
   }
 }
 
